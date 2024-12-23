@@ -39,7 +39,12 @@ jobs:
      uses: actions/checkout@v4
 
    - name: Set up Docker
-     uses: docker-practice/actions-setup-docker@v1
+     uses: docker/setup-buildx-action@v2 
+
+   - name: Set up Docker version (if needed)
+     run: |
+       sudo apt-get update
+       sudo apt-get install docker-ce=5:22.04.0~3-0~ubuntu-focal  # Optional, to install Docker version 22.04
 
    - name: Build Docker Image
      run: docker build -f Dockerfile -t myapp:latest .
