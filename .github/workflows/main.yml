@@ -6,7 +6,6 @@ jobs:
  sast_scan:
    name: Run Bandit Scan
    runs-on: ubuntu-latest
-   
 
    steps:
    - name: Checkout code
@@ -22,24 +21,26 @@ jobs:
 
    - name: Run Bandit Scan
      run: bandit -ll -ii -r . -f json -o bandit-report.json
- 
+
    - name: Upload Artifact
-     uses: actions/upload-artifact@v4
+     uses: actions/upload-artifact@v3
      if: always()
      with:
       name: bandit-findings
       path: bandit-report.json
 
  image_scan:
-    name: Build Image and Run Image Scan
-    runs-on: ubuntu-latest 
-    
-    container:
-      image: docker:22.04 
-   
-    steps:
-     - name: Checkout code
-       uses: actions/checkout@v2
+   name: Build Image and Run Image Scan
+   runs-on: ubuntu-latest
 
-     - name: Build Docker Image
-       run: docker build -f Dockerfile -t myapp:latest .
+   steps:
+   - name: Checkout code
+     uses: actions/checkout@v2
+
+   - name: Set up Docker
+     uses: docker-practice/actions-setup-docker@v1
+     with:
+      docker_version: '22.04'
+
+   - name: Build Docker Image
+     run: docker build -f Dockerfile -t myapp:latest .
