@@ -36,3 +36,10 @@ jobs:
     
     container:
       image: docker:22.04 
+   
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@v2
+
+     - name: Build Docker Image
+       run: docker build -f Dockerfile -t myapp:latest .
