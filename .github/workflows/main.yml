@@ -6,6 +6,7 @@ jobs:
  sast_scan:
    name: Run Bandit Scan
    runs-on: ubuntu-latest
+   
 
    steps:
    - name: Checkout code
@@ -32,6 +33,8 @@ jobs:
  image_scan:
    name: Build Image and Run Image Scan
    runs-on: ubuntu-latest
+    with:
+      docker_version: '22.04'
 
    steps:
    - name: Checkout code
