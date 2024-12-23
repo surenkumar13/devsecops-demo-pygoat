@@ -31,8 +31,8 @@ jobs:
       path: bandit-report.json
 
  image_scan:
-    - name: Build Image and Run Image Scan
-    - runs-on: ubuntu-latest 
+    name: Build Image and Run Image Scan
+    runs-on: ubuntu-latest 
     
-    - container:
+    container:
       image: docker:22.04 
