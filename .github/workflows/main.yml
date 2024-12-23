@@ -31,21 +31,8 @@ jobs:
       path: bandit-report.json
 
  image_scan:
-   name: Build Image and Run Image Scan
-   runs-on: ubuntu-latest
-
-   steps:
-   - name: Checkout code
-     uses: actions/checkout@v4
-
-   - name: Set up Docker
-     uses: docker/setup-buildx-action@v2 
-
-   - name: Set up Docker version (if needed)
-     run: |
-       sudo apt-get update
-       sudo apt-get install docker-ce=5:22.04.0~3-0~ubuntu-focal  # Optional, to install Docker version 22.04
-
-   - name: Build Docker Image
-     run: docker build -f Dockerfile -t myapp:latest .
-
+    - name: Build Image and Run Image Scan
+    - runs-on: ubuntu-latest 
+    
+    - container:
+      image: docker:22.04 
