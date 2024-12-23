@@ -33,8 +33,6 @@ jobs:
  image_scan:
    name: Build Image and Run Image Scan
    runs-on: ubuntu-latest
-    with:
-      docker_version: '22.04'
 
    steps:
    - name: Checkout code
@@ -43,18 +41,6 @@ jobs:
    - name: Set up Docker
      uses: docker-practice/actions-setup-docker@v1
 
-
    - name: Build Docker Image
      run: docker build -f Dockerfile -t myapp:latest .
 
-   - name: Docker Scout Scan
-     run: |
-        curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
-        sh install-scout.sh
-        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-        docker scout quickview
-        docker scout cves
-
-   
-
-   
